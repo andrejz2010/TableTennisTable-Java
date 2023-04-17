@@ -9,7 +9,7 @@ public class LeagueRow {
 
     public LeagueRow(int maxSize)
     {
-        this.maxSize = maxSize;
+        this.maxSize = maxSize; //computeMaxSizeWithSizeCap(maxSize); ignore this comment, it will be relevant in a future exercise
         players = new ArrayList<>();
     }
 
@@ -53,4 +53,15 @@ public class LeagueRow {
     {
         return players.contains(player);
     }
+
+    // private int computeMaxSizeWithSizeCap(int maxSize){
+    //     var sizeCapString = System.getenv("TABLE_TENNIS_LEAGUE_ROW_SIZE_CAP");
+    //     if (sizeCapString == null) return maxSize;
+
+    //     var sizeCap = Integer.parseInt(sizeCapString);
+    //     return maxSize <= sizeCap
+    //             ? maxSize
+    //             : sizeCap;
+    // }
+    // Ignore this size cap code, it will be relevant in a future exercise.
 }
