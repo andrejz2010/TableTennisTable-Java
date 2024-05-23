@@ -8,8 +8,7 @@ import java.util.List;
 
 public class LeagueTest {
     @Test
-    public void testAddPlayer()
-    {
+    public void testAddPlayer() {
         // Given
         League league = new League();
 
@@ -23,4 +22,21 @@ public class LeagueTest {
         Assert.assertEquals(1, firstRowPlayers.size());
         Assert.assertThat(firstRowPlayers, IsCollectionContaining.hasItem("Bob"));
     }
+
+
+        @Test
+        public void testGetRowsWithZeroPlayers()
+        {
+            // Given
+            League league = new League();
+
+
+            // When
+            List<LeagueRow> rows = league.getRows();
+
+            // Then
+
+            Assert.assertEquals(0, rows.size());
+        }
+
 }
