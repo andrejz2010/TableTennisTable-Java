@@ -56,7 +56,30 @@ public class LeagueTest {
         Assert.assertEquals(1, rows.size());
     }
 
+    @Test
+    public void getWinnerWillReturnTopPlayer() {
 
+        // Given
+        League league = new League();
+
+
+        // When
+        league.addPlayer("Tom");
+        league.addPlayer("Michael");
+        league.addPlayer("Charlie");
+
+        List<LeagueRow> rows = league.getRows();
+
+
+
+        league.recordWin("Michael", "Tom");
+        league.recordWin("Charlie", "Michael");
+        league.recordWin("Tom", "Charlie");
+
+        Assert.assertTrue(league.getWinner().equals("Tom"));
+    }
+
+//TODO: extract variables
 
 
 }
