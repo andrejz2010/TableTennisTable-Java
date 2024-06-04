@@ -32,11 +32,31 @@ public class LeagueTest {
 
 
             // When
+
             List<LeagueRow> rows = league.getRows();
 
             // Then
 
             Assert.assertEquals(0, rows.size());
         }
+    @Test
+    public void testGetRowsWithOnePlayers()
+    {
+        // Given
+        League league = new League();
+
+
+        // When
+        league.addPlayer("Bob");
+
+        List<LeagueRow> rows = league.getRows();
+
+
+        // Then
+        Assert.assertEquals(1, rows.size());
+    }
+
+
+
 
 }
