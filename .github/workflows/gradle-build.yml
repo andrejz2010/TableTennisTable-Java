@@ -1,0 +1,46 @@
+name: Build Java Project
+
+# When the workflow should run
+on:
+  push:
+    branches:
+      - main  # Run on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Run on pull requests to the main branch
+
+# Define the jobs
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest version of Ubuntu as the runner
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up JDK 17 (adjust the version to your project requirements)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # Or 'zulu', 'adopt', etc.
+          java-version: '17'
+
+      # Cache the Gradle wrapper and dependencies to speed up builds
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # Run the build using Gradle
+      - name: Build with Gradle
+        run: ./gradlew build --no-daemon
+
+      # Optionally, run tests
+      - name: Run tests
+        run: ./gradlew test --no-daemon
